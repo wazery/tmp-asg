@@ -57,7 +57,7 @@ module Capistrano
       end
 
       def instance_size
-        region_config.fetch(:aws_autoscale_instance_size, 'm1.small')
+        region_config.fetch(:aws_autoscale_instance_size, 'c5.2xlarge')
       end
 
       def deployed_with_asg?(lc)
