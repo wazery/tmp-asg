@@ -17,6 +17,8 @@ namespace :asg do
       # Iterate over relevant ASGs
       regions[region].each do |asg|
         set :aws_autoscale_group, asg
+        puts "Sleep 2 minutes to allow flushing memory to disk to happen"
+        sleep(2.minutes)
         Capistrano::Asg::AMI.create do |ami|
           puts "Autoscaling: Created AMI: #{ami.aws_counterpart.id} from region #{region} in ASG #{asg}"
           Capistrano::Asg::LaunchConfiguration.create(ami, fetch("#{region}_#{asg}".to_sym, {})) do |lc|
